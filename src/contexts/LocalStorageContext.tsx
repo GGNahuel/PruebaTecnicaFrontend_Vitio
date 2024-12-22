@@ -1,22 +1,10 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { TaskData } from "../types/TaskTypes";
+import DefaultData from "../constants/DefaultData";
 
 export interface ContextInterface {
   localStorageData: TaskData,
   setLocalStorageData: React.Dispatch<React.SetStateAction<TaskData>>
-}
-
-const startData : TaskData = {
-  tasks: {
-    "Tareas pendientes": {
-      listName: "Tareas pendientes",
-      listOfTasks: []
-    },
-    "Tareas completadas": {
-      listName: "Tareas completadas",
-      listOfTasks: []
-    }
-  }
 }
 
 export const LocalStorageContext = createContext<ContextInterface | undefined>(undefined)
@@ -24,7 +12,7 @@ export const LocalStorageContext = createContext<ContextInterface | undefined>(u
 export function LocalStorageProvider({children} : {children:ReactNode}) {
   const [localStorageData, setLocalStorageData] = useState<TaskData>(() => {
     const storedData = localStorage.getItem("tasks")
-    return storedData ? JSON.parse(storedData) : startData
+    return storedData ? JSON.parse(storedData) : DefaultData
   })
 
   useEffect(() => {
