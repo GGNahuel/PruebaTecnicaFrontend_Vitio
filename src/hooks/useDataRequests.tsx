@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
 import { TaskType } from "../types/TaskTypes";
 
-export function useAddTaskToList() {
+export function useAddTask() {
   const {setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
 
   const addTask = (ev: React.FormEvent<HTMLFormElement>) => {
