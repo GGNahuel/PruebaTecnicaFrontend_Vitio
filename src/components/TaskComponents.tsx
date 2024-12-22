@@ -1,12 +1,25 @@
-import { useContext, useEffect, useState } from "react";
-import { useRemoveTask, useSetCompletedTask } from "../hooks/useDataRequests";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useRemoveTask, useSetCompletedTask, useUpdateTask } from "../hooks/useDataRequests";
 import { TaskType } from "../types/TaskTypes";
 import Button from "./Button";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
+import Dialog from "./Dialog";
 
 export function TaskListComponent ({title, listOfTasks} : {title: string, listOfTasks: TaskType[]}) {
   const [newList, setNewList] = useState<TaskType[] | undefined>()
   const {localStorageData} = useContext(LocalStorageContext) as ContextInterface
+
+  const [selectedTaskToEdit, setTaskToEdit] = useState<TaskType>()
+  const dialogRef = useRef<HTMLDialogElement>(null)
+
+  const handleDialog = () => {
+    if (!dialogRef.current) return
+    if (dialogRef.current.open) dialogRef.current.close()
+    else dialogRef.current.showModal()
+  }
+  const handleShowEditDialog = (task: TaskType) => {
+    setTaskToEdit(task)
+  }
 
   useEffect(() => {
     if (title == "Tareas pendientes" || title == "Tareas completadas") {
@@ -19,6 +32,9 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
   return (
     <details className="w-full border-2 rounded-xl p-4">
       <summary className="text-lg">{title}</summary>
+      <Dialog handleDialog={handleDialog} headerChildren={<h2>Editar tarea</h2>}>
+        <p>asd</p>
+      </Dialog>
       <table className="w-full table-auto border-collapse mt-4">
         <thead className="bg-slate-200">
           <tr>
@@ -31,8 +47,8 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
             <tr>
               <td className="border" colSpan={2}>No hay tareas asignadas a esta lista</td>
             </tr> :
-            newList?.map((task) => <Task key={task.title} task={task}/>) ||
-            listOfTasks.map((task) => <Task key={task.title} task={task}/>)
+            newList?.map((task) => <Task key={task.title} task={task} setDialogProps={handleShowEditDialog}/>) ||
+            listOfTasks.map((task) => <Task key={task.title} task={task} setDialogProps={handleShowEditDialog}/>)
           }
         </tbody>
       </table>
@@ -40,7 +56,7 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
   )
 }
 
-function Task({task} : {task: TaskType}) {
+function Task({task, setDialogProps} : {task: TaskType, setDialogProps: (task: TaskType) => void}) {
   const {handleSetter} = useSetCompletedTask()
   const {handleRemove} = useRemoveTask()
 
@@ -48,6 +64,7 @@ function Task({task} : {task: TaskType}) {
     <tr className="even:bg-slate-100">
       <td className="border">{task.title}</td>
       <td className="border flex gap-4 justify-end">
+        <Button onClick={() => setDialogProps(task)}>✍️</Button>
         <Button onClick={() => handleSetter(task)}>✅</Button>
         <Button onClick={() => handleRemove(task)}>🚮</Button>
       </td>
