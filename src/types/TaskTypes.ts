@@ -1,8 +1,5 @@
 export type TaskData = {
-  tasks: {
-    inProcess: TaskList,
-    completed: TaskList
-  }
+  tasks: Record<string, TaskList>
 }
 
 type TaskList = {
