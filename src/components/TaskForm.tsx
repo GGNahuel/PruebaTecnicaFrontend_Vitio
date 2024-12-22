@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAddTask, useUpdateTask } from "../hooks/useDataRequests";
 import { TaskType } from "../types/TaskTypes";
 import Button from "./Button";
@@ -6,9 +6,17 @@ import Button from "./Button";
 export default function TaskForm({lists, objective, selectedTask} : {lists: string[], objective: "create" | "update", selectedTask?: TaskType}) {
   const [formValues, setFormValues] = useState<TaskType>({
     title: selectedTask?.title || "",
-    group: selectedTask?.group || "Tareas pendientes",
+    group: (selectedTask && selectedTask.group != "" && selectedTask.group) || "Tareas pendientes",
     state: selectedTask?.state || "process"
   })
+  
+  useEffect(() => {
+    setFormValues({
+      title: selectedTask?.title || "",
+      group: (selectedTask && selectedTask.group != "" && selectedTask.group) || "Tareas pendientes",
+      state: selectedTask?.state || "process"
+    })
+  }, [selectedTask])
 
   const {addTask} = useAddTask()
   const {handleUpdate} = useUpdateTask()

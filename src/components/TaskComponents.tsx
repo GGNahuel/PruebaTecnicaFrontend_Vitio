@@ -21,6 +21,7 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
   }
   const handleShowEditDialog = (task: TaskType) => {
     setTaskToEdit(task)
+    handleDialog()
   }
 
   useEffect(() => {
@@ -34,7 +35,7 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
   return (
     <details className="w-full border-2 rounded-xl p-4">
       <summary className="text-lg">{title}</summary>
-      <Dialog handleDialog={handleDialog} headerChildren={<h2>Editar tarea</h2>}>
+      <Dialog handleDialog={handleDialog} headerChildren={<h2>Editar tarea</h2>} ref={dialogRef}>
         <TaskForm lists={getTaskListNames(localStorageData)} objective="update" selectedTask={selectedTaskToEdit} />
       </Dialog>
       <table className="w-full table-auto border-collapse mt-4">

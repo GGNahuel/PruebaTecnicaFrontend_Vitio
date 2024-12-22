@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
 import { TaskData, TaskType } from "../types/TaskTypes";
 import { checkTaskAlreadyExists, removeTaskFromData, updateTaskInData } from "../functions/ManageTaskDataFunctions";
-import { DefaultData } from "../constants/TaskDataConstants";
+import { actualGroup, DefaultData } from "../constants/TaskDataConstants";
 
 export function useAddTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
@@ -17,13 +17,14 @@ export function useAddTask() {
     
     const newTask : TaskType = { title, group, state }
     
-    if (!checkTaskAlreadyExists(localStorageData, title)) {   
+    if (!checkTaskAlreadyExists(localStorageData, title)) {
+      const realGroup = actualGroup(newTask)
       setLocalStorageData(prev => ({
         tasks: {
           ...prev.tasks,
-          [group]: {
-            ...prev.tasks[group],
-            listOfTasks: [...prev.tasks[group].listOfTasks, newTask]
+          [realGroup]: {
+            ...prev.tasks[realGroup],
+            listOfTasks: [...prev.tasks[realGroup].listOfTasks, newTask]
           }
         }
       }))
