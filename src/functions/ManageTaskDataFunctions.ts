@@ -1,4 +1,5 @@
-import { GroupNames, TaskData, TaskType } from "../types/TaskTypes";
+import { actualGroup } from "../constants/TaskDataConstants";
+import { TaskData, TaskType } from "../types/TaskTypes";
 
 export function getTaskListNames(taskData: TaskData) : string[] {
   const listNames : string[] = Object.keys(taskData.tasks)
@@ -19,14 +20,14 @@ export function updateTaskInData(taskData: TaskData, taskToUpdate: TaskType, upd
     console.error("La tarea que se busca actualizar no se encuentra guardada")
   }
 
-  const actualGroup = taskToUpdate.group == "" ? "Tareas pendientes" : taskToUpdate.group
-  const taskIndex = temporalData.tasks[actualGroup].listOfTasks.findIndex(task => task.title == taskToUpdate.title)
+  const group = actualGroup(taskToUpdate)
+  const taskIndex = temporalData.tasks[group].listOfTasks.findIndex(task => task.title == taskToUpdate.title)
 
   if (taskToUpdate.group == updatedTask.group) {
-    temporalData.tasks[actualGroup].listOfTasks[taskIndex] = updatedTask
+    temporalData.tasks[group].listOfTasks[taskIndex] = updatedTask
   }
   else {
-    temporalData.tasks[actualGroup].listOfTasks.splice(taskIndex, 1)
+    temporalData.tasks[group].listOfTasks.splice(taskIndex, 1)
     temporalData.tasks[updatedTask.group].listOfTasks.push(updatedTask)
   }
 
@@ -54,12 +55,10 @@ export function removeTaskFromData(taskData: TaskData, taskToDelete: TaskType) :
     console.error("La tarea que se busca actualizar no se encuentra guardada")
   }
 
-  const actualGroup: GroupNames = taskToDelete.group == "" ?
-    taskToDelete.state == "process" ? "Tareas pendientes" : "Tareas completadas" :
-    taskToDelete.group
-  const taskIndex = temporalData.tasks[actualGroup].listOfTasks.findIndex(task => task.title == taskToDelete.title)
+  const group = actualGroup(taskToDelete)
+  const taskIndex = temporalData.tasks[group].listOfTasks.findIndex(task => task.title == taskToDelete.title)
 
-  temporalData.tasks[actualGroup].listOfTasks.splice(taskIndex, 1)
+  temporalData.tasks[group].listOfTasks.splice(taskIndex, 1)
 
   return temporalData
 }

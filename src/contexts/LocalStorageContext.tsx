@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { TaskData } from "../types/TaskTypes";
-import DefaultData from "../constants/DefaultData";
+import { DefaultData } from "../constants/TaskDataConstants";
 
 export interface ContextInterface {
   localStorageData: TaskData,

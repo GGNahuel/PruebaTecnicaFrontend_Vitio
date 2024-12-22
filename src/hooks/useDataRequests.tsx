@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
 import { TaskData, TaskType } from "../types/TaskTypes";
 import { checkTaskAlreadyExists, removeTaskFromData, updateTaskInData } from "../functions/ManageTaskDataFunctions";
-import DefaultData from "../constants/DefaultData";
+import { DefaultData } from "../constants/TaskDataConstants";
 
 export function useAddTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
