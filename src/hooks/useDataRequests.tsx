@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
-import { TaskType } from "../types/TaskTypes";
-import { checkTaskAlreadyExists } from "../functions/ManageTaskInfoFucntions";
+import { TaskData, TaskType } from "../types/TaskTypes";
+import { checkTaskAlreadyExists, updateTaskInData } from "../functions/ManageTaskDataFunctions";
 
 export function useAddTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
@@ -34,4 +34,31 @@ export function useAddTask() {
   }
 
   return {addTask}
+}
+
+export function useSetCompletedTask() {
+  const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
+
+  const handleSetter = (task: TaskType) => {
+    const updatedTask: TaskType = {
+      ...task,
+      state: "completed"
+    }
+
+    const updatedData: TaskData = updateTaskInData(localStorageData, task, updatedTask)
+
+    setLocalStorageData(updatedData)
+  }
+
+  return {handleSetter}
+}
+
+export function useUpdateTask() {
+  // const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
+
+  const handleUpdate = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault()
+  }
+
+  return {handleUpdate}
 }

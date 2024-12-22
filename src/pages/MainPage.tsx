@@ -2,7 +2,7 @@ import { useContext } from "react";
 import NewTaskForm from "../components/NewTaskForm";
 import { TaskListComponent } from "../components/TaskComponents";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
-import { getTaskListNames } from "../functions/ManageTaskInfoFucntions";
+import { getTaskListNames } from "../functions/ManageTaskDataFunctions";
 
 export default function MainPage() {
   const {localStorageData} = useContext(LocalStorageContext) as ContextInterface
