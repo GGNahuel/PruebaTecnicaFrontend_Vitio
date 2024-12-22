@@ -16,6 +16,7 @@ export function LocalStorageProvider({children} : {children:ReactNode}) {
   })
 
   useEffect(() => {
+    console.log("CONTEXT",localStorageData.tasks)
     localStorage.setItem("tasks", JSON.stringify(localStorageData))
   }, [localStorageData])
 

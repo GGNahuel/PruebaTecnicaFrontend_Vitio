@@ -1,8 +1,11 @@
 export type TaskData = {
-  tasks: Record<string, TaskList>
+  tasks: {
+    "Tareas pendientes": TaskGroup,
+    "Tareas completadas": TaskGroup,
+  } & Record<string, TaskGroup>
 }
 
-type TaskList = {
+type TaskGroup = {
   listName: string,
   listOfTasks: TaskType[]
 }

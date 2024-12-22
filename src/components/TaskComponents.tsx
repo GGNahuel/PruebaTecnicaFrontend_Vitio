@@ -1,7 +1,21 @@
+import { useContext, useEffect, useState } from "react";
+import { useSetCompletedTask } from "../hooks/useDataRequests";
 import { TaskType } from "../types/TaskTypes";
 import Button from "./Button";
+import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
 
 export function TaskListComponent ({title, listOfTasks} : {title: string, listOfTasks: TaskType[]}) {
+  const [newList, setNewList] = useState<TaskType[] | undefined>()
+  const {localStorageData} = useContext(LocalStorageContext) as ContextInterface
+
+  useEffect(() => {
+    if (title == "Tareas pendientes" || title == "Tareas completadas") {
+      const list = localStorageData.tasks[title].listOfTasks
+    
+      setNewList(list)
+    }
+  }, [localStorageData, title])
+
   return (
     <details className="w-full border-2 rounded-xl p-4">
       <summary className="text-lg">{title}</summary>
@@ -17,6 +31,7 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
             <tr>
               <td className="border" colSpan={2}>No hay tareas asignadas a esta lista</td>
             </tr> :
+            newList?.map((task) => <Task key={task.title} taskInfo={task}/>) ||
             listOfTasks.map((task) => <Task key={task.title} taskInfo={task}/>)
           }
         </tbody>
@@ -26,11 +41,13 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
 }
 
 function Task({taskInfo} : {taskInfo: TaskType}) {
+  const {handleSetter} = useSetCompletedTask()
+
   return (
     <tr className="even:bg-slate-100">
       <td className="border">{taskInfo.title}</td>
       <td className="border flex gap-4 justify-end">
-        <Button>✅</Button>
+        <Button onClick={() => handleSetter(taskInfo)}>✅</Button>
         <Button>🚮</Button>
       </td>
     </tr>

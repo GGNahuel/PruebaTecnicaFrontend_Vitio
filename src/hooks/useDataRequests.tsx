@@ -9,23 +9,24 @@ export function useAddTask() {
 
   const addTask = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
-
+    
     const formData = new FormData(ev.currentTarget)
     const group = formData.get("group") as string
     const title = formData.get("title") as string
-
+    
     const newTask : TaskType = {
       title, group,
       state: "process"
     }
-
+    
     if (!checkTaskAlreadyExists(localStorageData, title)) {   
+      const actualGroup = group == "" ? "Tareas pendientes" : group
       setLocalStorageData(prev => ({
         tasks: {
           ...prev.tasks,
-          [group]: {
-            ...prev.tasks[group],
-            listOfTasks: [...prev.tasks[group].listOfTasks, newTask]
+          [actualGroup]: {
+            ...prev.tasks[actualGroup],
+            listOfTasks: [...prev.tasks[actualGroup].listOfTasks, newTask]
           }
         }
       }))
