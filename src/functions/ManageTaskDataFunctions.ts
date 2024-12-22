@@ -7,11 +7,13 @@ export function getTaskListNames(taskData: TaskData) : string[] {
   return listNames
 }
 
+
 export function checkTaskAlreadyExists(taskData: TaskData, taskToCheck: string) : boolean {
   const allTasksNames = Object.values(taskData.tasks).map(taskList => taskList.listOfTasks).flat(1).map(task => task.title)
 
   return allTasksNames.includes(taskToCheck)
 }
+
 
 export function updateTaskInData(taskData: TaskData, taskToUpdate: TaskType, updatedTask: TaskType) : TaskData {
   let temporalData: TaskData = JSON.parse(JSON.stringify(taskData))
@@ -36,7 +38,8 @@ export function updateTaskInData(taskData: TaskData, taskToUpdate: TaskType, upd
   return temporalData
 }
 
-export function updateTaskGroupsByState(taskData: TaskData) : TaskData {
+
+function updateTaskGroupsByState(taskData: TaskData) : TaskData {
   const temporalData : TaskData = taskData
 
   const inProcessTasks : TaskType[] = Object.values(temporalData.tasks).map(taskList => taskList.listOfTasks).flat(1).filter(task => task.state == "process")
@@ -47,6 +50,7 @@ export function updateTaskGroupsByState(taskData: TaskData) : TaskData {
 
   return temporalData
 }
+
 
 export function removeTaskFromData(taskData: TaskData, taskToDelete: TaskType) : TaskData {
   const temporalData: TaskData = JSON.parse(JSON.stringify(taskData))

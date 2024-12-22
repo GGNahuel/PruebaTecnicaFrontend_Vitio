@@ -31,12 +31,13 @@ export function useAddTask() {
         }
       }))
     } else {
-      console.error("Ya existe una tarea con este nombre")
+      console.error("Ya existe una tarea con este título")
     }
   }
 
   return {addTask}
 }
+
 
 export function useSetCompletedTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
@@ -55,15 +56,32 @@ export function useSetCompletedTask() {
   return {handleSetter}
 }
 
-export function useUpdateTask() {
-  // const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
 
-  const handleUpdate = (ev: React.FormEvent<HTMLFormElement>) => {
+export function useUpdateTask() {
+  const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
+
+  const handleUpdate = (ev: React.FormEvent<HTMLFormElement>, originalTask: TaskType) => {
     ev.preventDefault()
+
+    const formData = new FormData(ev.currentTarget)
+    const group = formData.get("group") as string
+    const title = formData.get("title") as string
+    const state = formData.get("state") as "process" | "completed"
+    
+    const updatedTask : TaskType = { title, group, state }
+    
+    if (!checkTaskAlreadyExists(localStorageData, title)) {
+      const updatedData: TaskData = updateTaskInData(localStorageData, originalTask, updatedTask)
+
+      setLocalStorageData(updatedData)
+    } else {
+      console.error("Ya existe una tarea con el nuevo título que quiere añadir")
+    }
   }
 
   return {handleUpdate}
 }
+
 
 export function useRemoveTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
@@ -76,6 +94,7 @@ export function useRemoveTask() {
 
   return {handleRemove}
 }
+
 
 export function useResetData() {
   const {setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
