@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
 import { TaskData, TaskType } from "../types/TaskTypes";
-import { checkTaskAlreadyExists, updateTaskInData } from "../functions/ManageTaskDataFunctions";
+import { checkTaskAlreadyExists, removeTaskFromData, updateTaskInData } from "../functions/ManageTaskDataFunctions";
 import DefaultData from "../constants/DefaultData";
 
 export function useAddTask() {
@@ -63,6 +63,18 @@ export function useUpdateTask() {
   }
 
   return {handleUpdate}
+}
+
+export function useRemoveTask() {
+  const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
+
+  const handleRemove = (task: TaskType) => {
+    const newData: TaskData = removeTaskFromData(localStorageData, task)
+
+    setLocalStorageData(newData)
+  }
+
+  return {handleRemove}
 }
 
 export function useResetData() {

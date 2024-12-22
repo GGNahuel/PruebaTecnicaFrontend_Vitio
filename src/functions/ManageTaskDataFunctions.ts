@@ -1,4 +1,4 @@
-import { TaskData, TaskType } from "../types/TaskTypes";
+import { GroupNames, TaskData, TaskType } from "../types/TaskTypes";
 
 export function getTaskListNames(taskData: TaskData) : string[] {
   const listNames : string[] = Object.keys(taskData.tasks)
@@ -26,9 +26,7 @@ export function updateTaskInData(taskData: TaskData, taskToUpdate: TaskType, upd
     temporalData.tasks[actualGroup].listOfTasks[taskIndex] = updatedTask
   }
   else {
-    const oldListOfTask = temporalData.tasks[actualGroup].listOfTasks
-
-    temporalData.tasks[actualGroup].listOfTasks = oldListOfTask.slice(0, taskIndex).concat(oldListOfTask.slice(taskIndex +1))
+    temporalData.tasks[actualGroup].listOfTasks.splice(taskIndex, 1)
     temporalData.tasks[updatedTask.group].listOfTasks.push(updatedTask)
   }
 
@@ -45,6 +43,23 @@ export function updateTaskGroupsByState(taskData: TaskData) : TaskData {
 
   temporalData.tasks["Tareas pendientes"].listOfTasks = inProcessTasks
   temporalData.tasks["Tareas completadas"].listOfTasks = completedTasks
+
+  return temporalData
+}
+
+export function removeTaskFromData(taskData: TaskData, taskToDelete: TaskType) : TaskData {
+  const temporalData: TaskData = JSON.parse(JSON.stringify(taskData))
+
+  if (!checkTaskAlreadyExists(temporalData, taskToDelete.title)) {
+    console.error("La tarea que se busca actualizar no se encuentra guardada")
+  }
+
+  const actualGroup: GroupNames = taskToDelete.group == "" ?
+    taskToDelete.state == "process" ? "Tareas pendientes" : "Tareas completadas" :
+    taskToDelete.group
+  const taskIndex = temporalData.tasks[actualGroup].listOfTasks.findIndex(task => task.title == taskToDelete.title)
+
+  temporalData.tasks[actualGroup].listOfTasks.splice(taskIndex, 1)
 
   return temporalData
 }

@@ -15,3 +15,5 @@ export type TaskType = {
   state: "process" | "completed",
   group: string,
 }
+
+export type GroupNames = "Tareas pendientes" | "Tareas completadas" | string
