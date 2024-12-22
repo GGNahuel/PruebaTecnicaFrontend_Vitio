@@ -13,20 +13,17 @@ export function useAddTask() {
     const formData = new FormData(ev.currentTarget)
     const group = formData.get("group") as string
     const title = formData.get("title") as string
+    const state = formData.get("state") as "process" | "completed"
     
-    const newTask : TaskType = {
-      title, group,
-      state: "process"
-    }
+    const newTask : TaskType = { title, group, state }
     
     if (!checkTaskAlreadyExists(localStorageData, title)) {   
-      const actualGroup = group == "" ? "Tareas pendientes" : group
       setLocalStorageData(prev => ({
         tasks: {
           ...prev.tasks,
-          [actualGroup]: {
-            ...prev.tasks[actualGroup],
-            listOfTasks: [...prev.tasks[actualGroup].listOfTasks, newTask]
+          [group]: {
+            ...prev.tasks[group],
+            listOfTasks: [...prev.tasks[group].listOfTasks, newTask]
           }
         }
       }))
@@ -60,8 +57,13 @@ export function useSetCompletedTask() {
 export function useUpdateTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
 
-  const handleUpdate = (ev: React.FormEvent<HTMLFormElement>, originalTask: TaskType) => {
+  const handleUpdate = (ev: React.FormEvent<HTMLFormElement>, originalTask?: TaskType) => {
     ev.preventDefault()
+
+    if (!originalTask) {
+      console.error("No se ha seleccionado una tarea para editar")
+      return
+    }
 
     const formData = new FormData(ev.currentTarget)
     const group = formData.get("group") as string

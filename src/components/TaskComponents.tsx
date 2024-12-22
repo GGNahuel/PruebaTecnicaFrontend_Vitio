@@ -1,9 +1,11 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useRemoveTask, useSetCompletedTask, useUpdateTask } from "../hooks/useDataRequests";
+import { useRemoveTask, useSetCompletedTask } from "../hooks/useDataRequests";
 import { TaskType } from "../types/TaskTypes";
 import Button from "./Button";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
 import Dialog from "./Dialog";
+import TaskForm from "./TaskForm";
+import { getTaskListNames } from "../functions/ManageTaskDataFunctions";
 
 export function TaskListComponent ({title, listOfTasks} : {title: string, listOfTasks: TaskType[]}) {
   const [newList, setNewList] = useState<TaskType[] | undefined>()
@@ -33,7 +35,7 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
     <details className="w-full border-2 rounded-xl p-4">
       <summary className="text-lg">{title}</summary>
       <Dialog handleDialog={handleDialog} headerChildren={<h2>Editar tarea</h2>}>
-        <p>asd</p>
+        <TaskForm lists={getTaskListNames(localStorageData)} objective="update" selectedTask={selectedTaskToEdit} />
       </Dialog>
       <table className="w-full table-auto border-collapse mt-4">
         <thead className="bg-slate-200">

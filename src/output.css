@@ -570,6 +570,10 @@ table th, table td {
   display: table;
 }
 
+.hidden {
+  display: none;
+}
+
 .aspect-square {
   aspect-ratio: 1 / 1;
 }
