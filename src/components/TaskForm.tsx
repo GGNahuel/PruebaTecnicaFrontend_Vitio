@@ -9,7 +9,7 @@ export default function TaskForm({lists, objective, selectedTask} : {lists: stri
     group: (selectedTask && selectedTask.group != "" && selectedTask.group) || "Tareas pendientes",
     state: selectedTask?.state || "process"
   })
-  
+
   useEffect(() => {
     setFormValues({
       title: selectedTask?.title || "",
@@ -23,7 +23,7 @@ export default function TaskForm({lists, objective, selectedTask} : {lists: stri
 
   return (
     <form 
-      className="p-4 border-2 max-w-96 flex flex-col justify-between gap-4 align-center rounded-xl" 
+      className="p-4 border-2 max-w-lg min-w-80 flex flex-col justify-between gap-4 align-center rounded-xl" 
       onSubmit={(ev) => objective == "create" ? addTask(ev) : handleUpdate(ev, selectedTask)}
     >
       <div className="flex gap-8">
@@ -36,7 +36,9 @@ export default function TaskForm({lists, objective, selectedTask} : {lists: stri
       </div>
       <select name="group" onChange={(ev) => setFormValues(prev => ({...prev, group: ev.target.value}))}>
         <option value="">Seleccione un grupo de la lista</option>
-        {lists.map(listName => <option key={listName} value={listName}>{listName}</option>)}
+        {lists.map(listName => {
+          return (listName != "Tareas pendientes" && listName != "Tareas completadas") && <option key={listName} value={listName}>{listName}</option>
+        })}
       </select>
       <input type="hidden" name="state" value={formValues.state} />
     </form>

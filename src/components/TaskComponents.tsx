@@ -35,7 +35,11 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
   return (
     <details className="w-full border-2 rounded-xl p-4">
       <summary className="text-lg">{title}</summary>
-      <Dialog handleDialog={handleDialog} headerChildren={<h2>Editar tarea</h2>} ref={dialogRef}>
+      <Dialog handleDialog={handleDialog} ref={dialogRef}
+        headerChildren={
+          <h2 className="text-2xl">Editar tarea</h2>
+        } 
+      >
         <TaskForm lists={getTaskListNames(localStorageData)} objective="update" selectedTask={selectedTaskToEdit} />
       </Dialog>
       <table className="w-full table-auto border-collapse mt-4">

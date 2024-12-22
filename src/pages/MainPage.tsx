@@ -15,8 +15,8 @@ export default function MainPage() {
   return (
     <>
       <TaskForm lists={lists} objective="create"/>
-      <Button onClick={() => handleReset()} additionalClasses="bg-red-100">Boton de desarrollo: reiniciar datos</Button>
       {lists.map(listName => <TaskListComponent key={listName} title={listName} listOfTasks={localStorageData.tasks[listName].listOfTasks}/>)}
+      <Button onClick={() => handleReset()} additionalClasses="bg-red-100">Boton de desarrollo: reiniciar datos</Button>
     </>
   )
 }
