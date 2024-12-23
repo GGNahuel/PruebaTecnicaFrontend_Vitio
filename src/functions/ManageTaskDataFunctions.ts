@@ -1,5 +1,5 @@
 import { actualGroup } from "../constants/TaskDataConstants";
-import { TaskData, TaskType } from "../types/TaskTypes";
+import { GroupStateNames, TaskData, TaskType } from "../types/TaskTypes";
 
 export function getTaskListNames(taskData: TaskData) : string[] {
   const listNames : string[] = Object.keys(taskData.tasks)
@@ -42,8 +42,27 @@ export function updateTaskInData(taskData: TaskData, taskToUpdate: TaskType, upd
 function updateTaskGroupsByState(taskData: TaskData) : TaskData {
   const temporalData : TaskData = taskData
 
-  const inProcessTasks : TaskType[] = Object.values(temporalData.tasks).map(taskList => taskList.listOfTasks).flat(1).filter(task => task.state == "process")
-  const completedTasks : TaskType[] = Object.values(temporalData.tasks).map(taskList => taskList.listOfTasks).flat(1).filter(task => task.state == "completed")
+  const inProcessTitles = new Set()
+  const completedTitles = new Set()
+
+  const inProcessTasks : TaskType[] = Object.values(temporalData.tasks).map(taskList => taskList.listOfTasks).flat(1).filter(task => {
+    if (task.state != "process")
+      return false
+    if (inProcessTitles.has(task.title))
+      return false
+    
+    inProcessTitles.add(task.title)
+    return true
+  })
+  const completedTasks : TaskType[] = Object.values(temporalData.tasks).map(taskList => taskList.listOfTasks).flat(1).filter(task => {
+    if (task.state != "completed")
+      return false
+    if (completedTitles.has(task.title))
+      return false
+
+    completedTitles.add(task.title)
+    return true
+  })
 
   temporalData.tasks["Tareas pendientes"].listOfTasks = inProcessTasks
   temporalData.tasks["Tareas completadas"].listOfTasks = completedTasks
@@ -63,6 +82,13 @@ export function removeTaskFromData(taskData: TaskData, taskToDelete: TaskType) :
   const taskIndex = temporalData.tasks[group].listOfTasks.findIndex(task => task.title == taskToDelete.title)
 
   temporalData.tasks[group].listOfTasks.splice(taskIndex, 1)
+
+  if (taskToDelete.group != "") {
+    const groupByState: GroupStateNames = taskToDelete.state == "process" ? "Tareas pendientes" : "Tareas completadas"
+    const taskIndexInStateGroup = temporalData.tasks[groupByState].listOfTasks.findIndex(task => task.title == taskToDelete.title)
+
+    temporalData.tasks[group].listOfTasks.splice(taskIndexInStateGroup, 1)
+  }
 
   return temporalData
 }

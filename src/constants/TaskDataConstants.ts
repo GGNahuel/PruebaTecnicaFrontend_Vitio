@@ -1,4 +1,4 @@
-import { GroupNames, TaskData, TaskType } from "../types/TaskTypes";
+import { GroupStateNames, TaskData, TaskType } from "../types/TaskTypes";
 
 export const DefaultData : TaskData = {
   tasks: {
@@ -13,7 +13,7 @@ export const DefaultData : TaskData = {
   }
 }
 
-export const actualGroup = (task: TaskType) : GroupNames => {
+export const actualGroup = (task: TaskType) : GroupStateNames | string => {
   return task.group == "" ?
     task.state == "process" ? "Tareas pendientes" : "Tareas completadas" :
     task.group

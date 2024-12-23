@@ -671,6 +671,10 @@ table th, table td {
   gap: 2rem;
 }
 
+.overflow-auto {
+  overflow: auto;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }

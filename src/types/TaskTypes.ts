@@ -16,4 +16,4 @@ export type TaskType = {
   group: string,
 }
 
-export type GroupNames = "Tareas pendientes" | "Tareas completadas" | string
+export type GroupStateNames = "Tareas pendientes" | "Tareas completadas"
