@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
-import { getTaskListNames } from "../functions/ManageTaskDataFunctions";
 import { TaskType } from "../types/TaskTypes";
 import Dialog from "./Dialog";
 import TaskForm from "./TaskForm";
@@ -39,14 +38,12 @@ export function TaskGroup ({title, listOfTasks} : {title: string, listOfTasks: T
           <h2 className="text-2xl">Editar tarea</h2>
         } 
       >
-        <TaskForm lists={getTaskListNames(localStorageData)} objective="update" selectedTask={selectedTaskToEdit} />
+        <TaskForm objective="update" selectedTask={selectedTaskToEdit} />
       </Dialog>
       <table className="w-full table-auto border-collapse mt-4">
         <thead className="bg-sky-200">
           <tr>
             <th className="border">Nombre de la tarea</th>
-            <th className="border">Grupo</th>
-            {title != "Tareas pendientes" && title != "Tareas completadas" && <th className="border">Estado</th>}
             <th className="border">Acciones</th>
           </tr>
         </thead>
@@ -55,8 +52,8 @@ export function TaskGroup ({title, listOfTasks} : {title: string, listOfTasks: T
             <tr>
               <td className="border" colSpan={3}>No hay tareas asignadas a esta lista</td>
             </tr> :
-            newList?.map((task) => <TaskItem key={task.title} task={task} setDialogProps={handleShowEditDialog} isInStateGroup={title == "Tareas pendientes" || title == "Tareas completadas"} />) ||
-            listOfTasks.map((task) => <TaskItem key={task.title} task={task} setDialogProps={handleShowEditDialog} isInStateGroup={title == "Tareas pendientes" || title == "Tareas completadas"} />)
+            newList?.map((task) => <TaskItem key={task.title} task={task} setDialogProps={handleShowEditDialog} />) ||
+            listOfTasks.map((task) => <TaskItem key={task.title} task={task} setDialogProps={handleShowEditDialog} />)
           }
         </tbody>
       </table>

@@ -13,7 +13,7 @@ export const DefaultData : TaskData = {
   }
 }
 
-export const actualGroup = (task: TaskType) : GroupStateNames | string => {
+export const groupByState = (task: TaskType) : GroupStateNames | string => {
   return task.group == "" ?
     task.state == "process" ? "Tareas pendientes" : "Tareas completadas" :
     task.group

@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
-import { TaskData, TaskType } from "../types/TaskTypes";
+import { GroupStateNames, TaskData, TaskType } from "../types/TaskTypes";
 import { checkTaskAlreadyExists, removeTaskFromData, updateTaskInData } from "../functions/ManageTaskDataFunctions";
-import { actualGroup, DefaultData } from "../constants/TaskDataConstants";
+import { groupByState, DefaultData } from "../constants/TaskDataConstants";
 
 export function useAddTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
@@ -18,7 +18,7 @@ export function useAddTask() {
     const newTask : TaskType = { title, group, state }
     
     if (!checkTaskAlreadyExists(localStorageData, title)) {
-      const realGroup = actualGroup(newTask)
+      const realGroup = groupByState(newTask) as GroupStateNames
       setLocalStorageData(prev => ({
         tasks: {
           ...prev.tasks,
@@ -28,34 +28,10 @@ export function useAddTask() {
           }
         }
       }))
-      alert("Tarea agregada con éxito")
+      alert("✅ Tarea agregada con éxito")
     } else {
-      console.error("Ya existe una tarea con este título")
+      alert("❗Ya existe una tarea con este título")
     }
-  }
-
-  return {handleCreate}
-}
-
-
-export function useAddGroup() {
-  const {setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
-
-  const handleCreate = (ev: React.FormEvent<HTMLFormElement>) => {
-    ev.preventDefault()
-    
-    const formData = new FormData(ev.currentTarget)
-    const newGroupName = formData.get("listName") as string
-
-    setLocalStorageData(prev => ({
-      tasks: {
-        ...prev.tasks,
-        [newGroupName]: {
-          listName: newGroupName,
-          listOfTasks: []
-        }
-      }
-    }))
   }
 
   return {handleCreate}
@@ -68,7 +44,7 @@ export function useSetCompletedTask() {
   const handleSetter = (task: TaskType) => {
     const updatedTask: TaskType = {
       ...task,
-      state: "completed"
+      state: task.state == "completed" ? "process" : "completed"
     }
 
     const updatedData: TaskData = updateTaskInData(localStorageData, task, updatedTask)
@@ -102,9 +78,9 @@ export function useUpdateTask() {
       const updatedData: TaskData = updateTaskInData(localStorageData, originalTask, updatedTask)
 
       setLocalStorageData(updatedData)
-      alert("Se han realizado los cambios exitosamente")
+      alert("✅ Se han realizado los cambios exitosamente")
     } else {
-      console.error("Ya existe una tarea con el nuevo título que quiere añadir")
+      alert("❗ Ya existe una tarea con el nuevo título que quiere añadir")
     }
   }
 

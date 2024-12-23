@@ -4,17 +4,17 @@ import { TaskType } from "../types/TaskTypes";
 import Button from "./Button";
 import { AddIcon } from "./Icons";
 
-export default function TaskForm({lists, objective, selectedTask} : {lists: string[], objective: "create" | "update", selectedTask?: TaskType}) {
+export default function TaskForm({objective, selectedTask} : { objective: "create" | "update", selectedTask?: TaskType}) {
   const [formValues, setFormValues] = useState<TaskType>({
     title: selectedTask?.title || "",
-    group: (selectedTask && selectedTask.group != "" && selectedTask.group) || "Tareas pendientes",
+    group: selectedTask?.group || "",
     state: selectedTask?.state || "process"
   })
 
   useEffect(() => {
     setFormValues({
       title: selectedTask?.title || "",
-      group: (selectedTask && selectedTask.group != "" && selectedTask.group) || "Tareas pendientes",
+      group: selectedTask?.group || "",
       state: selectedTask?.state || "process"
     })
   }, [selectedTask])
@@ -35,12 +35,7 @@ export default function TaskForm({lists, objective, selectedTask} : {lists: stri
         </label>
         <Button type="submit" additionalClasses="aspect-square" rounded><AddIcon /></Button>
       </div>
-      <select name="group" className="p-2 bg-slate-100 rounded-md" onChange={(ev) => setFormValues(prev => ({...prev, group: ev.target.value}))}>
-        <option value="">Seleccione un grupo de la lista</option>
-        {lists.map(listName => {
-          return (listName != "Tareas pendientes" && listName != "Tareas completadas") && <option key={listName} value={listName}>{listName}</option>
-        })}
-      </select>
+      <input type="hidden" name="group" value={formValues.group} />
       <input type="hidden" name="state" value={formValues.state} />
     </form>
   )
