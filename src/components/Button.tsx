@@ -8,7 +8,7 @@ export default function Button({children, additionalClasses, variant = "normal",
     variant == "normal" ?
       "bg-sky-600 text-white hover:bg-sky-500 active:bg-sky-700 border-sky-700"
     : variant == "error" ?
-      "bg-red-800 text-white hover:bg-red-700 active:bg-red-900 border-red-900"
+      "bg-red-700 text-white hover:bg-red-600 active:bg-red-800 border-red-800"
     : variant == "success" ?
       "bg-green-600 text-black hover:bg-green-500 active:bg-green-700 border-green-700" 
     :"text-black hover:bg-slate-100 active:bg-slate-300 border-slate-300"

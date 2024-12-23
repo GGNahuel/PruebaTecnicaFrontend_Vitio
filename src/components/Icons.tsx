@@ -48,12 +48,15 @@ export function CheckIcon() {
 
 export function AddIcon() {
   return (
-    <svg className="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg className="icon" fill="#000000" height="200px" width="200px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlSpace="preserve">
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
       <g id="SVGRepo_iconCarrier"> 
-        <path d="M7 12L12 12M12 12L17 12M12 12V7M12 12L12 17" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path> 
-        <circle cx="12" cy="12" r="9" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></circle> 
+        <g> 
+          <g> 
+            <path d="M490.667,234.667H277.333V21.333C277.333,9.551,267.782,0,256,0s-21.333,9.551-21.333,21.333v213.333H21.333 C9.551,234.667,0,244.218,0,256s9.551,21.333,21.333,21.333h213.333v213.333c0,11.782,9.551,21.333,21.333,21.333 s21.333-9.551,21.333-21.333V277.333h213.333c11.782,0,21.333-9.551,21.333-21.333S502.449,234.667,490.667,234.667z"></path> 
+          </g> 
+        </g> 
       </g>
     </svg>
   )
