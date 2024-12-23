@@ -1,8 +1,8 @@
 import { useContext } from "react";
+import { groupByState } from "../constants/TaskDataConstants";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
-import { GroupStateNames, TaskData, TaskType } from "../types/TaskTypes";
 import { checkTaskAlreadyExists, removeTaskFromData, updateTaskInData } from "../functions/ManageTaskDataFunctions";
-import { groupByState, DefaultData } from "../constants/TaskDataConstants";
+import { GroupStateNames, TaskData, TaskType } from "../types/TaskTypes";
 
 export function useAddTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
@@ -98,13 +98,4 @@ export function useRemoveTask() {
   }
 
   return {handleRemove}
-}
-
-
-export function useResetData() {
-  const {setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
-
-  const handleReset = () => setLocalStorageData(DefaultData)
-
-  return {handleReset}
 }

@@ -1,4 +1,4 @@
-import { useSetCompletedTask, useRemoveTask } from "../hooks/useDataRequests"
+import { useSetCompletedTask, useRemoveTask } from "../hooks/TaskHooks"
 import { TaskType } from "../types/TaskTypes"
 import Button from "./Button"
 import { PencilIcon, CheckIcon, TrashCanIcon, CrossIcon } from "./Icons"

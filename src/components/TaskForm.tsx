@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAddTask, useUpdateTask } from "../hooks/useDataRequests";
+import { useAddTask, useUpdateTask } from "../hooks/TaskHooks";
 import { TaskType } from "../types/TaskTypes";
 import Button from "./Button";
 import { AddIcon } from "./Icons";
