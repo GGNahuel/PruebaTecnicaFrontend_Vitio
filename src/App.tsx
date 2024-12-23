@@ -4,7 +4,11 @@ import MainPage from "./pages/MainPage"
 function App() {
   return (
     <LocalStorageProvider>
-      <header className="flex flex-col gap-32 h-screen w-80 p-4 bg-slate-300">
+      <header className="
+        flex p-4 bg-slate-300
+        flex-row gap-4 justify-between sm:h-auto sm:w-full
+        lg:flex-col lg:gap-32 lg:h-screen lg:w-80 lg:justify-start
+      ">
         <h1 className="text-5xl">asd</h1>
         <nav></nav>
       </header>

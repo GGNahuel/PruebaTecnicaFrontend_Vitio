@@ -46,13 +46,14 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
         <thead className="bg-slate-200">
           <tr>
             <th className="border">Nombre de la tarea</th>
+            <th className="border">Grupo</th>
             <th className="border">Acciones</th>
           </tr>
         </thead>
         <tbody>
           {listOfTasks.length == 0 ?
             <tr>
-              <td className="border" colSpan={2}>No hay tareas asignadas a esta lista</td>
+              <td className="border" colSpan={3}>No hay tareas asignadas a esta lista</td>
             </tr> :
             newList?.map((task) => <Task key={task.title} task={task} setDialogProps={handleShowEditDialog}/>) ||
             listOfTasks.map((task) => <Task key={task.title} task={task} setDialogProps={handleShowEditDialog}/>)
@@ -70,7 +71,8 @@ function Task({task, setDialogProps} : {task: TaskType, setDialogProps: (task: T
   return (
     <tr className="even:bg-slate-100">
       <td className="border">{task.title}</td>
-      <td className="border flex gap-4 justify-end">
+      <td className="border">{task.group != "" ? task.group : "Sin grupo asignado"}</td>
+      <td className="border flex gap-4 justify-end flex-wrap">
         <Button onClick={() => setDialogProps(task)}>✍️</Button>
         <Button onClick={() => handleSetter(task)}>✅</Button>
         <Button onClick={() => handleRemove(task)}>🚮</Button>
