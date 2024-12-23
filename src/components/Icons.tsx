@@ -67,3 +67,31 @@ export function AddIcon() {
     </svg>
   )
 }
+
+export function MenuIcon() {
+  return (
+    <svg className="icon" fill="#000000" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g id="SVGRepo_iconCarrier"> <title></title> 
+        <g> 
+          <path d="M18,24H78a6,6,0,0,0,0-12H18a6,6,0,0,0,0,12Z"></path> 
+          <path d="M78,42H18a6,6,0,0,0,0,12H78a6,6,0,0,0,0-12Z"></path> 
+          <path d="M78,72H18a6,6,0,0,0,0,12H78a6,6,0,0,0,0-12Z"></path> 
+        </g> 
+      </g>
+    </svg>
+  )
+}
+
+export function BackIcon() {
+  return (
+    <svg className="icon" fill="#000000" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g id="SVGRepo_iconCarrier"> <title></title>
+        <path d="M69.8437,43.3876,33.8422,13.3863a6.0035,6.0035,0,0,0-7.6878,9.223l30.47,25.39-30.47,25.39a6.0035,6.0035,0,0,0,7.6878,9.2231L69.8437,52.6106a6.0091,6.0091,0,0,0,0-9.223Z"></path>
+      </g>
+    </svg>
+  )
+}
