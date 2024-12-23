@@ -19,23 +19,23 @@ export default function TaskForm({lists, objective, selectedTask} : {lists: stri
     })
   }, [selectedTask])
 
-  const {addTask} = useAddTask()
+  const {handleCreate} = useAddTask()
   const {handleUpdate} = useUpdateTask()
 
   return (
     <form 
       className="p-4 border-2 max-w-lg min-w-80 flex flex-col justify-between gap-4 align-center rounded-xl" 
-      onSubmit={(ev) => objective == "create" ? addTask(ev) : handleUpdate(ev, selectedTask)}
+      onSubmit={(ev) => objective == "create" ? handleCreate(ev) : handleUpdate(ev, selectedTask)}
     >
       <div className="flex gap-8">
         <label className="grow flex align-center">
-          <input type="text" name="title" className="w-full p-2" placeholder="Agregar tarea" required 
+          <input type="text" name="title" className="w-full p-2 bg-slate-100 rounded-md" placeholder="Agregar tarea" required 
             value={formValues.title} onChange={(ev) => setFormValues(prev => ({...prev, title: ev.target.value}))}
           />
         </label>
         <Button type="submit" additionalClasses="aspect-square" rounded><AddIcon /></Button>
       </div>
-      <select name="group" onChange={(ev) => setFormValues(prev => ({...prev, group: ev.target.value}))}>
+      <select name="group" className="p-2 bg-slate-100 rounded-md" onChange={(ev) => setFormValues(prev => ({...prev, group: ev.target.value}))}>
         <option value="">Seleccione un grupo de la lista</option>
         {lists.map(listName => {
           return (listName != "Tareas pendientes" && listName != "Tareas completadas") && <option key={listName} value={listName}>{listName}</option>

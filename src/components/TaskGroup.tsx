@@ -1,14 +1,12 @@
 import { useContext, useEffect, useRef, useState } from "react";
-import { useRemoveTask, useSetCompletedTask } from "../hooks/useDataRequests";
-import { TaskType } from "../types/TaskTypes";
-import Button from "./Button";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
+import { getTaskListNames } from "../functions/ManageTaskDataFunctions";
+import { TaskType } from "../types/TaskTypes";
 import Dialog from "./Dialog";
 import TaskForm from "./TaskForm";
-import { getTaskListNames } from "../functions/ManageTaskDataFunctions";
-import { CheckIcon, PencilIcon, TrashCanIcon } from "./Icons";
+import { TaskItem } from "./TaskItem";
 
-export function TaskListComponent ({title, listOfTasks} : {title: string, listOfTasks: TaskType[]}) {
+export function TaskGroup ({title, listOfTasks} : {title: string, listOfTasks: TaskType[]}) {
   const [newList, setNewList] = useState<TaskType[] | undefined>()
   const {localStorageData} = useContext(LocalStorageContext) as ContextInterface
 
@@ -48,6 +46,7 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
           <tr>
             <th className="border">Nombre de la tarea</th>
             <th className="border">Grupo</th>
+            {title != "Tareas pendientes" && title != "Tareas completadas" && <th className="border">Estado</th>}
             <th className="border">Acciones</th>
           </tr>
         </thead>
@@ -56,28 +55,11 @@ export function TaskListComponent ({title, listOfTasks} : {title: string, listOf
             <tr>
               <td className="border" colSpan={3}>No hay tareas asignadas a esta lista</td>
             </tr> :
-            newList?.map((task) => <Task key={task.title} task={task} setDialogProps={handleShowEditDialog}/>) ||
-            listOfTasks.map((task) => <Task key={task.title} task={task} setDialogProps={handleShowEditDialog}/>)
+            newList?.map((task) => <TaskItem key={task.title} task={task} setDialogProps={handleShowEditDialog} isInStateGroup={title == "Tareas pendientes" || title == "Tareas completadas"} />) ||
+            listOfTasks.map((task) => <TaskItem key={task.title} task={task} setDialogProps={handleShowEditDialog} isInStateGroup={title == "Tareas pendientes" || title == "Tareas completadas"} />)
           }
         </tbody>
       </table>
     </details>
-  )
-}
-
-function Task({task, setDialogProps} : {task: TaskType, setDialogProps: (task: TaskType) => void}) {
-  const {handleSetter} = useSetCompletedTask()
-  const {handleRemove} = useRemoveTask()
-
-  return (
-    <tr className="even:bg-sky-100">
-      <td className="border">{task.title}</td>
-      <td className="border">{task.group != "" ? task.group : "Sin grupo asignado"}</td>
-      <td className="border flex gap-4 justify-center lg:justify-end flex-wrap">
-        <Button onClick={() => setDialogProps(task)} variant="outlined" title="Editar tarea"><PencilIcon /></Button>
-        <Button onClick={() => handleSetter(task)} variant="success" title="Completar tarea"><CheckIcon /></Button>
-        <Button onClick={() => handleRemove(task)} variant="error" title="Eliminar tarea"><TrashCanIcon /></Button>
-      </td>
-    </tr>
   )
 }

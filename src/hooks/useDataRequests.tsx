@@ -7,7 +7,7 @@ import { actualGroup, DefaultData } from "../constants/TaskDataConstants";
 export function useAddTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
 
-  const addTask = (ev: React.FormEvent<HTMLFormElement>) => {
+  const handleCreate = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
     
     const formData = new FormData(ev.currentTarget)
@@ -28,12 +28,37 @@ export function useAddTask() {
           }
         }
       }))
+      alert("Tarea agregada con éxito")
     } else {
       console.error("Ya existe una tarea con este título")
     }
   }
 
-  return {addTask}
+  return {handleCreate}
+}
+
+
+export function useAddGroup() {
+  const {setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
+
+  const handleCreate = (ev: React.FormEvent<HTMLFormElement>) => {
+    ev.preventDefault()
+    
+    const formData = new FormData(ev.currentTarget)
+    const newGroupName = formData.get("listName") as string
+
+    setLocalStorageData(prev => ({
+      tasks: {
+        ...prev.tasks,
+        [newGroupName]: {
+          listName: newGroupName,
+          listOfTasks: []
+        }
+      }
+    }))
+  }
+
+  return {handleCreate}
 }
 
 
@@ -77,6 +102,7 @@ export function useUpdateTask() {
       const updatedData: TaskData = updateTaskInData(localStorageData, originalTask, updatedTask)
 
       setLocalStorageData(updatedData)
+      alert("Se han realizado los cambios exitosamente")
     } else {
       console.error("Ya existe una tarea con el nuevo título que quiere añadir")
     }

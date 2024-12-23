@@ -567,6 +567,14 @@ table th, table td {
   stroke: rgb(0,0,0);
 }
 
+.sticky {
+  position: sticky;
+}
+
+.top-0 {
+  top: 0px;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -647,10 +655,6 @@ table th, table td {
   align-items: center;
 }
 
-.justify-end {
-  justify-content: flex-end;
-}
-
 .justify-center {
   justify-content: center;
 }
@@ -700,9 +704,9 @@ table th, table td {
   border-color: rgb(21 128 61 / var(--tw-border-opacity, 1));
 }
 
-.border-red-900 {
+.border-red-800 {
   --tw-border-opacity: 1;
-  border-color: rgb(127 29 29 / var(--tw-border-opacity, 1));
+  border-color: rgb(153 27 27 / var(--tw-border-opacity, 1));
 }
 
 .border-sky-700 {
@@ -715,9 +719,9 @@ table th, table td {
   border-color: rgb(203 213 225 / var(--tw-border-opacity, 1));
 }
 
-.border-red-800 {
-  --tw-border-opacity: 1;
-  border-color: rgb(153 27 27 / var(--tw-border-opacity, 1));
+.bg-green-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1));
 }
 
 .bg-green-600 {
@@ -725,34 +729,9 @@ table th, table td {
   background-color: rgb(22 163 74 / var(--tw-bg-opacity, 1));
 }
 
-.bg-red-100 {
+.bg-red-700 {
   --tw-bg-opacity: 1;
-  background-color: rgb(254 226 226 / var(--tw-bg-opacity, 1));
-}
-
-.bg-red-800 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(153 27 27 / var(--tw-bg-opacity, 1));
-}
-
-.bg-sky-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(2 132 199 / var(--tw-bg-opacity, 1));
-}
-
-.bg-slate-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(226 232 240 / var(--tw-bg-opacity, 1));
-}
-
-.bg-slate-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(203 213 225 / var(--tw-bg-opacity, 1));
-}
-
-.bg-sky-300 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(125 211 252 / var(--tw-bg-opacity, 1));
+  background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
 }
 
 .bg-sky-200 {
@@ -765,9 +744,14 @@ table th, table td {
   background-color: rgb(56 189 248 / var(--tw-bg-opacity, 1));
 }
 
-.bg-red-700 {
+.bg-sky-600 {
   --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
+  background-color: rgb(2 132 199 / var(--tw-bg-opacity, 1));
+}
+
+.bg-slate-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));
 }
 
 .p-2 {
@@ -832,9 +816,9 @@ table th, table td {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 
-.even\:bg-slate-100:nth-child(even) {
+.even\:bg-green-200:nth-child(even) {
   --tw-bg-opacity: 1;
-  background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));
+  background-color: rgb(187 247 208 / var(--tw-bg-opacity, 1));
 }
 
 .even\:bg-sky-100:nth-child(even) {
@@ -847,9 +831,9 @@ table th, table td {
   background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1));
 }
 
-.hover\:bg-red-700:hover {
+.hover\:bg-red-600:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(185 28 28 / var(--tw-bg-opacity, 1));
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
 }
 
 .hover\:bg-sky-500:hover {
@@ -860,11 +844,6 @@ table th, table td {
 .hover\:bg-slate-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));
-}
-
-.hover\:bg-red-600:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
 }
 
 .focus-visible\:outline:focus-visible {
@@ -888,9 +867,9 @@ table th, table td {
   background-color: rgb(21 128 61 / var(--tw-bg-opacity, 1));
 }
 
-.active\:bg-red-900:active {
+.active\:bg-red-800:active {
   --tw-bg-opacity: 1;
-  background-color: rgb(127 29 29 / var(--tw-bg-opacity, 1));
+  background-color: rgb(153 27 27 / var(--tw-bg-opacity, 1));
 }
 
 .active\:bg-sky-700:active {
@@ -901,11 +880,6 @@ table th, table td {
 .active\:bg-slate-300:active {
   --tw-bg-opacity: 1;
   background-color: rgb(203 213 225 / var(--tw-bg-opacity, 1));
-}
-
-.active\:bg-red-800:active {
-  --tw-bg-opacity: 1;
-  background-color: rgb(153 27 27 / var(--tw-bg-opacity, 1));
 }
 
 @media (min-width: 640px) {
