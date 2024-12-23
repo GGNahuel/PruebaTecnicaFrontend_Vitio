@@ -1,7 +1,7 @@
 import { useSetCompletedTask, useRemoveTask } from "../hooks/useDataRequests"
 import { TaskType } from "../types/TaskTypes"
 import Button from "./Button"
-import { PencilIcon, CheckIcon, TrashCanIcon } from "./Icons"
+import { PencilIcon, CheckIcon, TrashCanIcon, CrossIcon } from "./Icons"
 
 export function TaskItem(
   {task, setDialogProps} : 
@@ -17,7 +17,13 @@ export function TaskItem(
       <td className="border">{task.title}</td>
       <td className="border flex gap-4 justify-center lg:justify-end flex-wrap">
         <Button onClick={() => setDialogProps(task)} variant="outlined" title="Editar tarea"><PencilIcon /></Button>
-        <Button onClick={() => handleSetter(task)} variant="success" title="Completar tarea"><CheckIcon /></Button>
+        <Button 
+          onClick={() => handleSetter(task)} 
+          variant={task.state == "process" ? "success" : "normal"} 
+          title={task.state == "completed" ? "Completar tarea" : "Dejar como pendiente"}
+        >
+          {task.state == "process" ? <CheckIcon /> : <CrossIcon />}
+        </Button>
         <Button onClick={() => handleRemove(task)} variant="error" title="Eliminar tarea"><TrashCanIcon /></Button>
       </td>
     </tr>

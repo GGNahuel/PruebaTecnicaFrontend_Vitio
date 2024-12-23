@@ -1,20 +1,11 @@
 export function PencilIcon () {
   return (
-    <svg className="icon" width="800px" height="800px" viewBox="0 0 192 192" xmlns="http://www.w3.org/2000/svg" xmlSpace="preserve" fill="none">
-      <path d="m104.175 90.97-4.252 38.384 38.383-4.252L247.923 15.427V2.497L226.78-18.646h-12.93zm98.164-96.96 31.671 31.67" className="cls-1" 
-        style={{
-          fill: "none", fillOpacity: 1, fillRule: "nonzero", strokeWidth: 12, strokeLinecap: "round", strokeLinejoin: "round",
-          strokeDasharray: "none", strokeOpacity: 1
-        }} 
-        transform="translate(-77.923 40.646)"
-      />
-      <path d="m195.656 33.271-52.882 52.882" 
-        style={{
-          fill: "none", fillOpacity: 1, fillRule: "nonzero", strokeWidth: 12, strokeLinecap: "round", 
-          strokeLinejoin: "round", strokeMiterlimit: 5, strokeDasharray: "none", strokeOpacity: 1
-        }}
-        transform="translate(-77.923 40.646)"
-      />
+    <svg className="icon" fill="#000000" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g id="SVGRepo_iconCarrier"> <title></title>
+        <path d="M84.4373,11.577a18.0012,18.0012,0,0,0-25.46,0L8.0639,62.4848A5.9955,5.9955,0,0,0,6.306,66.7271V83.6964a5.9968,5.9968,0,0,0,6,6H29.2813a5.9959,5.9959,0,0,0,4.2423-1.7579l50.92-50.9078A18.0419,18.0419,0,0,0,84.4373,11.577Zm-8.49,8.4847a6.014,6.014,0,0,1,.0058,8.4846l-4.243,4.243-8.4891-8.4861,4.2416-4.2415A5.998,5.998,0,0,1,75.9468,20.0617Zm-49.15,57.6345h-8.49V69.2116L54.7352,32.7871l8.489,8.4861Z"></path>
+      </g>
     </svg>
   )
 }
@@ -40,6 +31,21 @@ export function CheckIcon() {
         <g> 
           <path d="M58.3945,32.1563,42.9961,50.625l-5.3906-6.4629a5.995,5.995,0,1,0-9.211,7.6758l9.9961,12a5.9914,5.9914,0,0,0,9.211.0059l20.0039-24a5.9988,5.9988,0,1,0-9.211-7.6875Z"></path> 
           <path d="M48,0A48,48,0,1,0,96,48,48.0512,48.0512,0,0,0,48,0Zm0,84A36,36,0,1,1,84,48,36.0393,36.0393,0,0,1,48,84Z"></path> 
+        </g> 
+      </g>
+    </svg>
+  )
+}
+
+export function CrossIcon() {
+  return (
+    <svg className="icon" fill="#000000" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+      <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+      <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+      <g id="SVGRepo_iconCarrier"> <title></title> 
+        <g> 
+          <path d="M48,0A48,48,0,1,0,96,48,48.0512,48.0512,0,0,0,48,0Zm0,84A36,36,0,1,1,84,48,36.0393,36.0393,0,0,1,48,84Z"></path> 
+          <path d="M64.2422,31.7578a5.9979,5.9979,0,0,0-8.4844,0L48,39.5156l-7.7578-7.7578a5.9994,5.9994,0,0,0-8.4844,8.4844L39.5156,48l-7.7578,7.7578a5.9994,5.9994,0,1,0,8.4844,8.4844L48,56.4844l7.7578,7.7578a5.9994,5.9994,0,0,0,8.4844-8.4844L56.4844,48l7.7578-7.7578A5.9979,5.9979,0,0,0,64.2422,31.7578Z"></path> 
         </g> 
       </g>
     </svg>
