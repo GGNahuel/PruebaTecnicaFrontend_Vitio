@@ -2,6 +2,22 @@
 
 ## Instrucciones para ejecutar la aplicación
 
+### Herramientas necesarias
+
+Para que los comandos funcionen correctamente, asegúrate de tener las siguientes herramientas instaladas en tu máquina:
+
+- **Node.js** (versión 16 o superior): [Descargar Node.js](https://nodejs.org/)
+- **npm**: Si tienes Node.js, también tendrás `npm`. Si prefieres usar Yarn, puedes instalarlo desde [aquí](https://yarnpkg.com/).
+- **Git**: [Descargar Git](https://git-scm.com/)
+
+Verifica que las herramientas están correctamente instaladas ejecutando los siguientes comandos:
+
+```bash
+node -v   # Debería mostrar la versión de Node.js
+npm -v    # Debería mostrar la versión de npm
+git --version  # Debería mostrar la versión de Git
+```
+
 ### 1. Clonar el repositorio
 Primero se debe clonar el repositorio en el equipo local. Para esto primero asegúrate que la ruta de la terminal sea donde quieres alojar el proyecto, luego puedes clonarlo con el siguiente comando:
 
