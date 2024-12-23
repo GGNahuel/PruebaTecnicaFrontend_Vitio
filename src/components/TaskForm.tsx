@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAddTask, useUpdateTask } from "../hooks/useDataRequests";
 import { TaskType } from "../types/TaskTypes";
 import Button from "./Button";
+import { AddIcon } from "./Icons";
 
 export default function TaskForm({lists, objective, selectedTask} : {lists: string[], objective: "create" | "update", selectedTask?: TaskType}) {
   const [formValues, setFormValues] = useState<TaskType>({
@@ -32,7 +33,7 @@ export default function TaskForm({lists, objective, selectedTask} : {lists: stri
             value={formValues.title} onChange={(ev) => setFormValues(prev => ({...prev, title: ev.target.value}))}
           />
         </label>
-        <Button type="submit" additionalClasses="aspect-square">+</Button>
+        <Button type="submit" additionalClasses="aspect-square" rounded><AddIcon /></Button>
       </div>
       <select name="group" onChange={(ev) => setFormValues(prev => ({...prev, group: ev.target.value}))}>
         <option value="">Seleccione un grupo de la lista</option>
