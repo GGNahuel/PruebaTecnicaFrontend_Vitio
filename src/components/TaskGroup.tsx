@@ -3,25 +3,21 @@ import { TaskType } from "../types/TaskTypes";
 import Dialog from "./Dialog";
 import TaskForm from "./TaskForm";
 import { TaskItem } from "./TaskItem";
+import handleDialog from "../functions/handleDialog";
 
 export function TaskGroup ({title, listOfTasks} : {title: string, listOfTasks: TaskType[]}) {
   const [selectedTaskToEdit, setTaskToEdit] = useState<TaskType>()
   const dialogRef = useRef<HTMLDialogElement>(null)
 
-  const handleDialog = () => {
-    if (!dialogRef.current) return
-    if (dialogRef.current.open) dialogRef.current.close()
-    else dialogRef.current.showModal()
-  }
   const handleShowEditDialog = (task: TaskType) => {
     setTaskToEdit(task)
-    handleDialog()
+    handleDialog(dialogRef)
   }
 
   return (
     <details className="w-full border-2 rounded-xl p-4">
       <summary className="text-lg">{title}</summary>
-      <Dialog handleDialog={handleDialog} ref={dialogRef}
+      <Dialog handleDialog={() => handleDialog(dialogRef)} ref={dialogRef}
         headerChildren={
           <h2 className="text-2xl">Editar tarea</h2>
         } 

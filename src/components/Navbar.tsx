@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Button from "./Button";
 import { AddIcon, BackIcon, MenuIcon } from "./Icons";
+import Dialog from "./Dialog";
+import TaskForm from "./TaskForm";
+import handleDialog from "../functions/handleDialog";
 
 export function Navbar() {
   const [isMenuOpened, setIsMenuOpened] = useState(false)
+  const dialogRef = useRef(null)
 
   return (
     <header className="
@@ -24,8 +28,11 @@ export function Navbar() {
       `}>
         <Button additionalClasses="lg:hidden w-min self-end aspect-square" onClick={() => setIsMenuOpened(prev => !prev)}><BackIcon /></Button>
         <label className="flex gap-4 cursor-pointer">
-          <Button rounded><AddIcon /></Button>
+          <Button rounded onClick={() => handleDialog(dialogRef)}><AddIcon /></Button>
           <h2 className="text-xl font-medium">Agregar tarea</h2>
+          <Dialog ref={dialogRef} handleDialog={() => handleDialog(dialogRef)} headerChildren={<h2 className="text-xl font-medium">Agregar tarea</h2>}>
+            <TaskForm objective="create" />
+          </Dialog>
         </label>
         <nav>
           <ul className="flex flex-col gap-2">

@@ -636,6 +636,15 @@ table th, table td {
   max-width: 32rem;
 }
 
+.max-w-full {
+  max-width: 100%;
+}
+
+.max-w-max {
+  max-width: -moz-max-content;
+  max-width: max-content;
+}
+
 .grow {
   flex-grow: 1;
 }
@@ -954,6 +963,14 @@ table th, table td {
 
   .lg\:w-80 {
     width: 20rem;
+  }
+
+  .lg\:min-w-80 {
+    min-width: 20rem;
+  }
+
+  .lg\:max-w-lg {
+    max-width: 32rem;
   }
 
   .lg\:flex-row {

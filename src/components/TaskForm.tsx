@@ -24,10 +24,10 @@ export default function TaskForm({objective, selectedTask} : { objective: "creat
 
   return (
     <form 
-      className="p-4 border-2 max-w-lg min-w-80 flex flex-col justify-between gap-4 align-center rounded-xl" 
+      className="p-4 border-2 max-w-full lg:max-w-lg lg:min-w-80 flex flex-col justify-between gap-4 align-center rounded-xl box-border" 
       onSubmit={(ev) => objective == "create" ? handleCreate(ev) : handleUpdate(ev, selectedTask)}
     >
-      <div className="flex gap-8">
+      <div className="flex gap-4">
         <label className="grow flex align-center">
           <input type="text" name="title" className="w-full p-2 bg-slate-100 rounded-md" placeholder="Agregar tarea" required 
             value={formValues.title} onChange={(ev) => setFormValues(prev => ({...prev, title: ev.target.value}))}
