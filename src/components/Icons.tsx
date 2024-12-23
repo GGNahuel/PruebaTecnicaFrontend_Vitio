@@ -84,9 +84,9 @@ export function MenuIcon() {
   )
 }
 
-export function BackIcon() {
+export function BackIcon({rotate = 0} : {rotate?: number}) {
   return (
-    <svg className="icon" fill="#000000" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+    <svg className="icon transition" fill="#000000" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" transform={`rotate(${rotate})`}>
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
       <g id="SVGRepo_iconCarrier"> <title></title>
