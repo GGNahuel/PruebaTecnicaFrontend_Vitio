@@ -11,19 +11,20 @@ export function Navbar() {
 
   return (
     <header className="
-      flex p-4 bg-sky-400 sticky top-0
+      flex p-4 bg-sky-400 sticky top-0 z-10
       flex-row gap-4 justify-between sm:h-auto sm:w-full
       lg:flex-col lg:gap-24 lg:h-screen lg:w-80 lg:justify-start
     ">
       <h1 className="text-5xl">To-do app</h1>
       <div className={`
-        absolute lg:static right-0 top-0
+        absolute lg:static right-0 top-0 z-20
         pl-16 p-4 lg:p-0 h-screen lg:h-auto
         bg-slate-200 lg:bg-transparent
-        flex-col gap-8 lg:flex
+        flex-col gap-8 flex
+        lg:translate-x-0 lg:transition-none transition transition-duration-300
         ${isMenuOpened ? 
-          "flex" : 
-          "hidden"
+          "translate-x-0" : 
+          "translate-x-full"
         } 
       `}>
         <Button additionalClasses="lg:hidden w-min self-end aspect-square" onClick={() => setIsMenuOpened(prev => !prev)}><BackIcon /></Button>

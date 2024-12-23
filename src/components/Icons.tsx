@@ -85,8 +85,10 @@ export function MenuIcon() {
 }
 
 export function BackIcon({rotate = 0} : {rotate?: number}) {
+  const rotateClass = rotate === 90 ? "rotate-90" : rotate === -90 ? "-rotate-90" : ""
+
   return (
-    <svg className="icon transition" fill="#000000" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg" transform={`rotate(${rotate})`}>
+    <svg className={`icon transition ${rotateClass}`} fill="#000000" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
       <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
       <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
       <g id="SVGRepo_iconCarrier"> <title></title>
