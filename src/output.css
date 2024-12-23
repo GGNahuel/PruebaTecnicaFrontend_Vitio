@@ -571,10 +571,6 @@ table th, table td {
   position: absolute;
 }
 
-.relative {
-  position: relative;
-}
-
 .sticky {
   position: sticky;
 }
@@ -589,14 +585,6 @@ table th, table td {
 
 .z-10 {
   z-index: 10;
-}
-
-.-z-0 {
-  z-index: 0;
-}
-
-.z-0 {
-  z-index: 0;
 }
 
 .z-20 {
@@ -742,10 +730,6 @@ table th, table td {
 
 .overflow-hidden {
   overflow: hidden;
-}
-
-.overflow-x-hidden {
-  overflow-x: hidden;
 }
 
 .rounded {
@@ -950,6 +934,10 @@ table th, table td {
   background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1));
 }
 
+.hover\:font-bold:hover {
+  font-weight: 700;
+}
+
 .focus-visible\:outline:focus-visible {
   outline-style: solid;
 }
@@ -999,10 +987,6 @@ table th, table td {
 @media (min-width: 1024px) {
   .lg\:static {
     position: static;
-  }
-
-  .lg\:flex {
-    display: flex;
   }
 
   .lg\:hidden {

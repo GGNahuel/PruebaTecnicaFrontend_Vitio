@@ -28,7 +28,7 @@ export function Navbar() {
         } 
       `}>
         <Button additionalClasses="lg:hidden w-min self-end aspect-square" onClick={() => setIsMenuOpened(prev => !prev)}><BackIcon /></Button>
-        <label className="flex gap-4 cursor-pointer">
+        <label className="flex gap-4 cursor-pointer items-center">
           <Button rounded onClick={() => handleDialog(dialogRef)}><AddIcon /></Button>
           <h2 className="text-xl font-medium">Agregar tarea</h2>
           <Dialog ref={dialogRef} handleDialog={() => handleDialog(dialogRef)} headerChildren={<h2 className="text-xl font-medium">Agregar tarea</h2>}>
@@ -37,10 +37,10 @@ export function Navbar() {
         </label>
         <nav>
           <ul className="flex flex-col gap-2">
-            <li><a href="/" className="text-lg font-medium">Inicio</a></li>
-            <li><a href="" className="text-lg font-medium">Mis listas</a></li>
-            <li><a href="" className="text-lg font-medium">Tareas importantes</a></li>
-            <li><a href="" className="text-lg font-medium">Calendario de tareas</a></li>
+            <li><a href="/" className="text-lg font-medium hover:font-bold">Inicio</a></li>
+            <li><a href="" className="text-lg font-medium hover:font-bold">Mis listas</a></li>
+            <li><a href="" className="text-lg font-medium hover:font-bold">Tareas importantes</a></li>
+            <li><a href="" className="text-lg font-medium hover:font-bold">Calendario de tareas</a></li>
           </ul>
         </nav>
       </div>

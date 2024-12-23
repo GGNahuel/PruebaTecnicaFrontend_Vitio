@@ -20,7 +20,7 @@ export function TaskItem(
         <Button 
           onClick={() => handleSetter(task)} 
           variant={task.state == "process" ? "success" : "normal"} 
-          title={task.state == "completed" ? "Completar tarea" : "Dejar como pendiente"}
+          title={task.state == "process" ? "Completar tarea" : "Dejar como pendiente"}
         >
           {task.state == "process" ? <CheckIcon /> : <CrossIcon />}
         </Button>
