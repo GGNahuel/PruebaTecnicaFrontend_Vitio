@@ -38,7 +38,7 @@ export function Navbar() {
         <nav>
           <ul className="flex flex-col gap-2">
             <li><a href="/" className="text-lg font-medium hover:font-bold">Inicio</a></li>
-            <li><a href="" className="text-lg font-medium hover:font-bold">Mis listas</a></li>
+            <li><a href="" className="text-lg font-medium hover:font-bold">Mis grupos de tareas</a></li>
             <li><a href="" className="text-lg font-medium hover:font-bold">Tareas importantes</a></li>
             <li><a href="" className="text-lg font-medium hover:font-bold">Calendario de tareas</a></li>
           </ul>
