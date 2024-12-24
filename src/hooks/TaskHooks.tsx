@@ -19,8 +19,10 @@ export function useAddTask() {
     if (!checkTaskAlreadyExists(localStorageData, title)) {
       const dataWithChanges = addTaskInData(localStorageData, newTask)
       setLocalStorageData(dataWithChanges)
-      
+
       alert("✅ Tarea agregada con éxito")
+    } else {
+      alert("❗Ya existe una tarea con este título")
     }
   }
 
@@ -37,9 +39,13 @@ export function useSetCompletedTask() {
       state: task.state == "completed" ? "process" : "completed"
     }
 
-    const updatedData: TaskData = updateTaskInData(localStorageData, task, updatedTask)
-
-    setLocalStorageData(updatedData)
+    try {
+      const updatedData: TaskData = updateTaskInData(localStorageData, task, updatedTask)
+  
+      setLocalStorageData(updatedData)
+    } catch (error) {
+      console.warn(error)
+    }
   }
 
   return {handleSetter}
@@ -49,13 +55,8 @@ export function useSetCompletedTask() {
 export function useUpdateTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
 
-  const handleUpdate = (ev: React.FormEvent<HTMLFormElement>, originalTask?: TaskType) => {
+  const handleUpdate = (ev: React.FormEvent<HTMLFormElement>, originalTask: TaskType) => {
     ev.preventDefault()
-
-    if (!originalTask) {
-      console.error("No se ha seleccionado una tarea para editar")
-      return
-    }
 
     const formData = new FormData(ev.currentTarget)
     const group = formData.get("group") as string
@@ -65,10 +66,14 @@ export function useUpdateTask() {
     const updatedTask : TaskType = { title, group, state }
     
     if (!checkTaskAlreadyExists(localStorageData, title)) {
-      const updatedData: TaskData = updateTaskInData(localStorageData, originalTask, updatedTask)
-
-      setLocalStorageData(updatedData)
-      alert("✅ Se han realizado los cambios exitosamente")
+      try {
+        const updatedData: TaskData = updateTaskInData(localStorageData, originalTask, updatedTask)
+  
+        setLocalStorageData(updatedData)
+        alert("✅ Se han realizado los cambios exitosamente")
+      } catch (error) {
+        console.warn(error)
+      }
     } else {
       alert("❗ Ya existe una tarea con el nuevo título que quiere añadir")
     }
@@ -82,9 +87,13 @@ export function useRemoveTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
 
   const handleRemove = (task: TaskType) => {
-    const newData: TaskData = removeTaskFromData(localStorageData, task)
+    try {
+      const newData: TaskData = removeTaskFromData(localStorageData, task)
 
-    setLocalStorageData(newData)
+      setLocalStorageData(newData)
+    } catch (error) {
+      console.warn(error)
+    }
   }
 
   return {handleRemove}

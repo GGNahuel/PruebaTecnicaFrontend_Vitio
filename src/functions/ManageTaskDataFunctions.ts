@@ -30,7 +30,6 @@ export function updateTaskInData(taskData: TaskData, taskToUpdate: TaskType, upd
   const temporalData: TaskData = JSON.parse(JSON.stringify(taskData))
 
   if (!checkTaskAlreadyExists(temporalData, taskToUpdate.title)) {
-    console.error("La tarea que se busca actualizar no se encuentra guardada")
     throw new Error("La tarea que se busca actualizar no se encuentra guardada")
   }
 
@@ -54,7 +53,6 @@ export function removeTaskFromData(taskData: TaskData, taskToDelete: TaskType) :
   const temporalData: TaskData = JSON.parse(JSON.stringify(taskData))
 
   if (!checkTaskAlreadyExists(temporalData, taskToDelete.title)) {
-    console.error("La tarea que se busca remover no se encuentra guardada")
     throw new Error("La tarea que se busca remover no se encuentra guardada")
   }
 

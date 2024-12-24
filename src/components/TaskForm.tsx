@@ -25,7 +25,7 @@ export default function TaskForm({objective, selectedTask} : { objective: "creat
   return (
     <form 
       className="p-4 border-2 max-w-full lg:max-w-lg lg:min-w-80 flex flex-col justify-between gap-4 align-center rounded-xl box-border" 
-      onSubmit={(ev) => objective == "create" ? handleCreate(ev) : handleUpdate(ev, selectedTask)}
+      onSubmit={(ev) => objective == "create" ? handleCreate(ev) : selectedTask && handleUpdate(ev, selectedTask)}
     >
       <div className="flex gap-4">
         <label className="grow flex align-center">
