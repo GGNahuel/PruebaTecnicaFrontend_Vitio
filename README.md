@@ -59,3 +59,19 @@ Cuenta con una barra de navegación lateral (superior en dispositivos móviles) 
 Las tareas creadas se dividen en dos listas según su estado, sean completadas o pendientes. Si la aplicación escala se agregan más listas según los grupos que se encuentren en memoria.
 
 ### Acerca de la arquitectura del código
+
+Se han ubicado los recursos en distintas carpetas según su uso o función. 
+
+Los datos de las tareas son guardados localmente en el ***local-storage***, y manejados desde la aplicación mediante un **estado global dentro de un contexto** de React. Esto para facilitar su uso a los componentes o recursos que requieran de estos datos.
+
+Cada recurso tiene una única función, en él puede llamar a otros recursos para que pueda cumplir esa función. Ejemplos: 
+- Los componentes solo se encargan de funciones que tiene que ver con el renderizado de elementos, y en él se llama a otros recursos para obtener lo que necesita para hacerlo.
+  
+- Los hooks se encargan de preparar los datos que serán solicitados o enviados a lo almacenado en el *local storage*. 
+  
+  En otros casos estos se encargarían de preparar, realizar y recibir lo retornado de las solicitudes HTTP a una API Rest.
+  
+- Las funciones dentro del archivo "ManageTaskDataFunctions" se encargan de devolver datos o generar los cambios que serán guardados en el estado global de la aplicación según lo almacenado en el localStorage. 
+  
+  Siguiendo el ejemplo de la API, estas funciones simularían la lógica de negocio o servicios que interaccionarían con la base de datos si es el caso.
+

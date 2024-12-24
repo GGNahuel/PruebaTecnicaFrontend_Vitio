@@ -29,13 +29,11 @@ export function updateTaskInData(taskData: TaskData, taskToUpdate: TaskType, upd
   
   if (taskToUpdate.state == updatedTask.state) {
     temporalData.tasks[group].listOfTasks[taskIndex] = updatedTask
-    console.log("ASDASD")
   }
   else {
     const groupUpdated = groupByState(updatedTask) as GroupStateNames
     temporalData.tasks[group].listOfTasks.splice(taskIndex, 1)
     temporalData.tasks[groupUpdated].listOfTasks.push(updatedTask)
-    console.log("412421")
   }
 
   return temporalData
@@ -46,7 +44,7 @@ export function removeTaskFromData(taskData: TaskData, taskToDelete: TaskType) :
   const temporalData: TaskData = JSON.parse(JSON.stringify(taskData))
 
   if (!checkTaskAlreadyExists(temporalData, taskToDelete.title)) {
-    console.error("La tarea que se busca actualizar no se encuentra guardada")
+    console.error("La tarea que se busca remover no se encuentra guardada")
   }
 
   const group = groupByState(taskToDelete) as GroupStateNames
