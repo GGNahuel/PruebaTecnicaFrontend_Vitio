@@ -1,0 +1,13 @@
+.details-content {
+  overflow: hidden;
+  transition: height 150ms ease;
+}
+
+/* .details-content.hidden {
+  height: 0;
+}
+
+.details-content.visible {
+  height: auto;
+  max-height: 9999px;
+} */

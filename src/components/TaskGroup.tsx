@@ -6,11 +6,14 @@ import { TaskItem } from "./TaskItem";
 import handleDialog from "../functions/handleDialog";
 import { BackIcon } from "./Icons";
 
+import "./../detailsAnimationClasses.css";
+
 export function TaskGroup ({title, listOfTasks} : {title: string, listOfTasks: TaskType[]}) {
-  const [opened, setOpened] = useState(false)
+  const [opened, setOpened] = useState(true)
   const [selectedTaskToEdit, setTaskToEdit] = useState<TaskType>()
   const dialogRef = useRef<HTMLDialogElement>(null)
   const detailsRef = useRef<HTMLDetailsElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
 
   const handleShowEditDialog = (task: TaskType) => {
     setTaskToEdit(task)
@@ -20,15 +23,42 @@ export function TaskGroup ({title, listOfTasks} : {title: string, listOfTasks: T
   useEffect(() => {
     const detailsElement = detailsRef.current
 
-    detailsElement?.addEventListener("toggle", () => setOpened(detailsElement.open))
+    const handleToggle = () => {
+      const content = contentRef.current
+      if (!content) return;
+
+      if (detailsElement?.open) {
+        content.classList.add("visible")
+        content.classList.remove("hidden")
+        const fullHeight = content.scrollHeight
+
+        requestAnimationFrame(() => {
+          content.style.height = `${fullHeight}px`
+        });
+
+        setOpened(true)
+      } else {
+        content.style.height = `${content.scrollHeight}px`
+
+        requestAnimationFrame(() => {
+          content.style.height = "0"
+          content.classList.add("hidden")
+          content.classList.remove("visible")
+        });
+
+        setOpened(false);
+      }
+    }
+
+    detailsElement?.addEventListener("toggle", handleToggle)
 
     return () => {
-      detailsElement?.removeEventListener('toggle', () => setOpened(detailsElement.open))
+      detailsElement?.removeEventListener('toggle', handleToggle)
     }
   }, [])
 
   return (
-    <details className="w-full border-2 rounded-xl" ref={detailsRef}>
+    <details className="w-full border-2 rounded-xl" ref={detailsRef} open>
       <summary className="text-xl flex items-center justify-between cursor-pointer p-4 hover:bg-slate-100">
         {title}
         <div className="flex gap-2 items-center">
@@ -43,7 +73,10 @@ export function TaskGroup ({title, listOfTasks} : {title: string, listOfTasks: T
       >
         <TaskForm objective="update" selectedTask={selectedTaskToEdit} />
       </Dialog>
-      <section className="p-4">
+      <div 
+        ref={contentRef}
+        className={`p-4 details-content visible`}
+      >
         <table className="w-full table-auto border-collapse">
           <thead className="bg-sky-200">
             <tr>
@@ -60,7 +93,7 @@ export function TaskGroup ({title, listOfTasks} : {title: string, listOfTasks: T
             }
           </tbody>
         </table>
-      </section>
+      </div>
     </details>
   )
 }
