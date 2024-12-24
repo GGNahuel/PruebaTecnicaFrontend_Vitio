@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import { groupByState } from "../constants/TaskDataConstants";
 import { ContextInterface, LocalStorageContext } from "../contexts/LocalStorageContext";
-import { checkTaskAlreadyExists, removeTaskFromData, updateTaskInData } from "../functions/ManageTaskDataFunctions";
-import { GroupStateNames, TaskData, TaskType } from "../types/TaskTypes";
+import { addTaskInData, checkTaskAlreadyExists, removeTaskFromData, updateTaskInData } from "../functions/ManageTaskDataFunctions";
+import { TaskData, TaskType } from "../types/TaskTypes";
 
 export function useAddTask() {
   const {localStorageData, setLocalStorageData} = useContext(LocalStorageContext) as ContextInterface
@@ -18,19 +17,10 @@ export function useAddTask() {
     const newTask : TaskType = { title, group, state }
     
     if (!checkTaskAlreadyExists(localStorageData, title)) {
-      const realGroup = groupByState(newTask) as GroupStateNames
-      setLocalStorageData(prev => ({
-        tasks: {
-          ...prev.tasks,
-          [realGroup]: {
-            ...prev.tasks[realGroup],
-            listOfTasks: [...prev.tasks[realGroup].listOfTasks, newTask]
-          }
-        }
-      }))
+      const dataWithChanges = addTaskInData(localStorageData, newTask)
+      setLocalStorageData(dataWithChanges)
+      
       alert("✅ Tarea agregada con éxito")
-    } else {
-      alert("❗Ya existe una tarea con este título")
     }
   }
 

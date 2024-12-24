@@ -16,12 +16,22 @@ export function checkTaskAlreadyExists(taskData: TaskData, taskToCheck: string) 
 }
 
 
+export function addTaskInData(taskData: TaskData, taskToAdd: TaskType) : TaskData {
+  const temporalData: TaskData = JSON.parse(JSON.stringify(taskData))
+
+  const group = groupByState(taskToAdd) as GroupStateNames
+  temporalData.tasks[group].listOfTasks.push(taskToAdd)
+
+  return temporalData
+}
+
+
 export function updateTaskInData(taskData: TaskData, taskToUpdate: TaskType, updatedTask: TaskType) : TaskData {
   const temporalData: TaskData = JSON.parse(JSON.stringify(taskData))
-  console.log(taskToUpdate, updatedTask)
 
   if (!checkTaskAlreadyExists(temporalData, taskToUpdate.title)) {
     console.error("La tarea que se busca actualizar no se encuentra guardada")
+    throw new Error("La tarea que se busca actualizar no se encuentra guardada")
   }
 
   const group = groupByState(taskToUpdate) as GroupStateNames
@@ -45,6 +55,7 @@ export function removeTaskFromData(taskData: TaskData, taskToDelete: TaskType) :
 
   if (!checkTaskAlreadyExists(temporalData, taskToDelete.title)) {
     console.error("La tarea que se busca remover no se encuentra guardada")
+    throw new Error("La tarea que se busca remover no se encuentra guardada")
   }
 
   const group = groupByState(taskToDelete) as GroupStateNames
