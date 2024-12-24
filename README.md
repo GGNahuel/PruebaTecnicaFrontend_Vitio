@@ -65,7 +65,7 @@ Se han ubicado los recursos en distintas carpetas según su uso o función.
 Los datos de las tareas son guardados localmente en el ***local-storage***, y manejados desde la aplicación mediante un **estado global dentro de un contexto** de React. Esto para facilitar su uso a los componentes o recursos que requieran de estos datos.
 
 Cada recurso tiene una única función, en él puede llamar a otros recursos para que pueda cumplir esa función si es necesario. Ejemplos: 
-- Los componentes solo se encargan de funciones que tiene que ver únicamente con el renderizado de elementos, y en él se llama a otros recursos para obtener los datos o funciones que necesita para hacerlo.
+- Los componentes solo se encargan de funciones relacionadas únicamente al renderizado o funcionamiento de elementos, y en él se llama a otros recursos para obtener los datos o funciones que necesita para hacerlo.
   
 - Los hooks se encargan de preparar los datos que serán solicitados o enviados a lo almacenado en el *local storage*. 
   
@@ -76,6 +76,3 @@ Cada recurso tiene una única función, en él puede llamar a otros recursos par
   Siguiendo el ejemplo de la API, estas funciones simularían la lógica de negocio o servicios en la misma. Que interaccionarían con la base de datos si es el caso.
 
 Contiene verificaciones y mensajes de éxito o error.
-
-## Comentario extra
-
